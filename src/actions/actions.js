@@ -72,8 +72,6 @@ export function selectFilm(film) {
 }
 
 export function resetFilms() {
-    console.log('reset_all');
-
     return {
         type: ACTION_TYPES.resetFilms,
     };

@@ -1,16 +1,6 @@
 import {ACTION_TYPES} from '../actions/actions-types';
-import {SEARCH_FIELDS} from '../components/search/consts';
-import {SORT_FIELDS} from '../components/description/consts';
 
-const initialState = {
-    films: [],
-    selectedFilm: null,
-    searchValue: null,
-    searchField: SEARCH_FIELDS.title.name,
-    sortField: SORT_FIELDS.release.name,
-};
-
-export default function Reducer(state = initialState, action) {
+export default function Reducer(state, action) {
     switch (action.type) {
         case ACTION_TYPES.fetchFilms:
             return state;

@@ -1,19 +1,19 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import {createStore,  applyMiddleware} from 'redux';
-import Reducer from './reducers/reducer';
-import thunk from 'redux-thunk'
-
-const store = createStore(Reducer, applyMiddleware(thunk));
 import Page from './components/pages/Page';
+import ConfigureStore from './reducers/configure-store';
+import { PersistGate } from 'redux-persist/integration/react'
 
+const {store, persistor} = ConfigureStore();
 
 export default class App extends Component {
     render() {
         return (
             <div>
                 <Provider store={store}>
+                    <PersistGate loading={null} persistor={persistor}>
                     <Page/>
+                    </PersistGate>
                 </Provider>
             </div>
         );
