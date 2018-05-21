@@ -22,6 +22,9 @@ export default class FilmList extends Component {
 
     renderFilms = () => {
         const {films} = this.props;
+        if(films.length === 0) {
+            return (<span>No films found</span>)
+        }
         return films.map(film => (
             <FilmListItem
                 title={film.title}
