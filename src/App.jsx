@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import Page from './components/pages/Page';
 import ConfigureStore from './reducers/configure-store';
-import { PersistGate } from 'redux-persist/integration/react'
-
+// import {PersistGate} from 'redux-persist/integration/react'
+import {BrowserRouter} from 'react-router-dom';
+import Router from './Route'
+import Page from './components/pages/Page';
 const {store, persistor} = ConfigureStore();
 
 export default class App extends Component {
@@ -11,9 +12,9 @@ export default class App extends Component {
         return (
             <div>
                 <Provider store={store}>
-                    <PersistGate loading={null} persistor={persistor}>
-                    <Page/>
-                    </PersistGate>
+                    <BrowserRouter>
+                        <Router/>
+                    </BrowserRouter>
                 </Provider>
             </div>
         );

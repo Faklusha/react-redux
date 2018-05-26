@@ -1,10 +1,11 @@
-import { createStore, applyMiddleware } from 'redux'
-import { persistStore, persistReducer } from 'redux-persist'
+import {createStore, combineReducers, applyMiddleware} from 'redux'
+import {persistStore, persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import {SEARCH_FIELDS} from '../components/search/consts';
 import {SORT_FIELDS} from '../components/description/consts';
 import Reducer from './reducer';
- import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
+import {routerReducer} from 'react-router-redux'
 
 const persistConfig = {
     key: 'root',
@@ -20,9 +21,9 @@ const initialState = {
 };
 
 const persistedReducer = persistReducer(persistConfig, Reducer);
-
+const reducers = [persistedReducer];
 export default () => {
-    let store = createStore(persistedReducer, initialState, applyMiddleware(thunk));
+    let store = createStore(combineReducers({reducers, routing: routerReducer}), initialState, applyMiddleware(thunk));
     let persistor = persistStore(store);
-    return { store, persistor };
+    return {store, persistor};
 }

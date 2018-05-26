@@ -30,9 +30,8 @@ export default class Search extends Component {
     };
 
     searchFilms = () => {
-        const {dispatch, searchValue, searchField, sortField, resetActiveFilm} = this.props;
+        const {dispatch, searchValue, searchField, sortField} = this.props;
         bindActionCreators(fetchFilms, dispatch)(searchValue, searchField, sortField);
-        resetActiveFilm();
     }
 
     render() {

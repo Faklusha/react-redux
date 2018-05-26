@@ -1,28 +1,30 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import { push } from 'react-router-redux';
 import {bindActionCreators} from 'redux';
 import FilmListItem from './FilmListItem';
-import {fetchFilms, fetchFilmById} from '../../actions/actions';
+import {fetchFilms} from '../../actions/actions';
+
 import './_film-list.css';
 
 @connect(state => ({
     films: state.films,
-}))
+}), {push, fetchFilms})
 export default class FilmList extends Component {
 
     componentDidMount() {
-        const {dispatch} = this.props;
-        bindActionCreators(fetchFilms, dispatch)();
+        const {fetchFilms} = this.props;
+        fetchFilms();
     }
 
     selectFilm = (id) => {
-        const {dispatch, sortField} = this.props;
-        bindActionCreators(fetchFilmById, dispatch)(id);
+        const {push} = this.props;
+        push('someurl')
     }
 
     renderFilms = () => {
         const {films} = this.props;
-        if(films.length === 0) {
+        if(!films || films.length === 0) {
             return (<span>No films found</span>)
         }
         return films.map(film => (
@@ -40,7 +42,7 @@ export default class FilmList extends Component {
 
     render() {
         return (
-            <div className={"film-list"}>
+            <div className="film-list">
                 {this.renderFilms()}
             </div>
         );
